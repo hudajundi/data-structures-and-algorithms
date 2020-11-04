@@ -161,28 +161,32 @@ const currentEvents = {
 
 function getCurrentEvents(request, response){
   // Solution code here...
-  response.stats(200).send(mapCurrentEvents());
+
+  return response.status(200).json(mapCurrentEvents);
+
 
 }
 
 const mapCurrentEvents = () => {
   // Solution code here...
+
   let arr = currentEvents.news.map(element => {
     return new Event(element);
 });
 return arr;
+
 
 }
 
 function Event(obj){
   // Solution code here...
 
-
-  this.author = obj.author;
+  this.author = obj.author,
     this.categories = obj.category;
-    this.summary = obj.description;
-    this.img_url = obj.image;
-    this.date = obj.published;
+  this.summary = obj.description,
+    this.img_url = obj.url,
+    this.date = obj.published,
+
     this.title = obj.title;
 }
 
@@ -196,8 +200,10 @@ Note: You may not use the array's built-in length property.
 
 const countNumberOfElements = (arr) => {
   // Solution code here...
+
   let result = arr.reduce(ctr => (ctr += 1));
     return result
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -258,10 +264,12 @@ let starWarsData = [{
 
 const returnNames = (arr) => {
   // Solution code here...
-  return arr.reduce((acc, value) => {
-    acc.push(value.name);
-    return acc;
-}, []);
+
+  return arr.reduce((ret, value, idx) => {
+    ret[idx] = value.name;
+    return ret;
+  }, []);
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -274,6 +282,7 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 
 const reversedString = (str) => {
   // Solution code here...
+
   return str
   .split('')
   .reduce((acc, val, idx) => {
@@ -281,6 +290,7 @@ const reversedString = (str) => {
       return acc;
   }, [])
   .join('');
+
 };
 
 /* ------------------------------------------------------------------------------------------------
