@@ -9,9 +9,44 @@ Build a simple express server. Connect a '/hello' route that sends a greeting of
 const createServer = () => {
   // Solution code here...
 
+  let express = require('express');
+  let app = express();
+
+
+
   var server = app.listen(3301, function () {
     var port = server.address().port;
     console.log('Example app listening at port', port);
+
+
+
+    app.get('/hello', welcoming);
+    app.get('/aboutme', aboutMe);
+    app.get('/favoritefoods', myFood);
+    app.get('/*', handleError);
+
+
+    function welcoming(req,res){
+      res.status(200).send('hello world');
+    
+    }
+
+    function aboutMe(req,res){
+      res.status(200).send('I am Huda Al-jundi')
+    }
+
+
+    function myFood(req,res){
+      res.status(200).send(['burger','steak','sushi']);
+    }
+
+
+    function handleError(req,res){
+      res.status(500).send('sorry,,wronge')
+      
+
+    }
+
   });
   return server;
 };
@@ -28,6 +63,18 @@ For example, count(5, [[1, 3, 5, 7, 9], [5, 5, 5], [1, 2, 3]]) returns 4.
 
 const count = (target, input) => {
   // Solution code here...
+
+  let count = 0;
+  input.filter((val, idx) => {
+    input[idx].filter(value => {
+      if (value === target) {
+        count++;
+      }
+    })
+  })
+  return count;
+
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -42,6 +89,16 @@ For example, [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]] returns 66.
 
 const totalSum = (input) => {
   // Solution code here...
+
+  return input.reduce((acc, value, index) => {
+    acc += input[index].reduce((accum, value) => {
+      accum += value;
+      return accum;
+    }, 0)
+    return acc;
+  }, 0)
+  
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -58,6 +115,15 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 
 const divisibleByFiveTwoToThePower = (input) => {
   // Solution code here...
+
+  let result = input.map( array =>{
+    let arr= array.filter( (val) =>
+     (typeof val === 'number' && val%5 === 0)).map( item =>Math.pow(2,item))
+     return arr;
+     })
+     return result
+   
+
 };
 
 /* ------------------------------------------------------------------------------------------------
